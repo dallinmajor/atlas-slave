@@ -131,7 +131,7 @@ const Navbar = () => {
           ? 'bg-black/90 backdrop-blur-md border-b border-teal-500/30' 
           : 'bg-transparent'
       }`}
-      style={{ fontFamily: 'system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' }}
+      style={{ fontFamily: '"Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' }}
     >
       <div className={`w-full px-4 sm:px-6 md:px-12 transition-all duration-700 ease-in-out ${
         isScrolled 

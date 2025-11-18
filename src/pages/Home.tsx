@@ -93,25 +93,27 @@ const Home = () => {
           </div>
 
           {/* Email Signup Form */}
-          <div className="container mx-auto px-4 pb-12 sm:pb-16 md:pb-20">
+          <div className="container mx-auto px-4 pb-12 sm:pb-16 md:pb-20" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
             <div className="max-w-md mx-auto">
-              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Stay Updated</h2>
-              <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 text-center drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 text-center tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.02em' }}>Stay Updated</h2>
+              <p className="text-base sm:text-lg text-gray-200 mb-6 sm:mb-8 text-center drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] font-light">
                 Sign up for our email list to get the latest news, music releases, and show dates.
               </p>
-              <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-4">
-                <div className="flex flex-col sm:flex-row gap-2">
+              <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="flex-1 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white placeholder-gray-400 border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400"
+                    className="flex-1 px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white placeholder-gray-400 border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
+                    style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
                   />
                   <button
                     type="submit"
-                    className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-teal-600 hover:bg-teal-500 text-white font-semibold rounded-lg transition-colors shadow-lg"
+                    className="px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-teal-600 hover:bg-teal-500 text-white font-black uppercase tracking-wider rounded-lg transition-all duration-300 shadow-lg hover:shadow-teal-500/50"
+                    style={{ fontWeight: 900 }}
                   >
                     Sign Up
                   </button>
@@ -126,34 +128,38 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10">
+      <section id="about" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center">About Us</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-8 sm:mb-12 text-center tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.03em' }}>
+            About Us
+          </h1>
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-800 rounded-lg p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
+            <div className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 mb-8 sm:mb-12 shadow-2xl">
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 font-light" style={{ lineHeight: '1.8' }}>
                 Welcome to Atlas Slave. We are a band passionate about creating music that resonates 
                 with our audience and tells our story through sound.
               </p>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 font-light" style={{ lineHeight: '1.8' }}>
                 Formed with a shared vision and love for music, we've been crafting our unique sound 
                 and connecting with fans around the world. Our journey is just beginning, and we're 
                 excited to share it with you.
               </p>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed font-light" style={{ lineHeight: '1.8' }}>
                 Stay connected with us through our music, live shows, and social media. Thank you for 
                 being part of our musical journey.
               </p>
             </div>
             
             {/* Band Members Section */}
-            <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center">Band Members</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-8 sm:mb-12 text-center tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.02em' }}>
+              Band Members
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {membersList.map((member) => (
-                <div key={member.name} className="bg-gray-800 rounded-lg p-4 sm:p-6 text-center">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-700 rounded-full mx-auto mb-3 sm:mb-4"></div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">{member.name}</h3>
-                  <p className="text-sm sm:text-base text-gray-400">{member.instrument}</p>
+                <div key={member.name} className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 text-center hover:border-teal-400/50 transition-all duration-300 shadow-xl">
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-teal-500/20 to-gray-700 rounded-full mx-auto mb-4 sm:mb-6 border-2 border-teal-500/30"></div>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white uppercase tracking-wide" style={{ fontWeight: 700 }}>{member.name}</h3>
+                  <p className="text-sm sm:text-base text-teal-300 font-medium uppercase tracking-wider">{member.instrument}</p>
                 </div>
               ))}
             </div>
@@ -162,23 +168,25 @@ const Home = () => {
       </section>
 
       {/* Music Section */}
-      <section id="music" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10">
+      <section id="music" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center">Music</h1>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg sm:text-xl text-gray-300 text-center mb-8 sm:mb-12">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-8 sm:mb-12 text-center tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.03em' }}>
+            Music
+          </h1>
+          <div className="max-w-5xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 text-center mb-12 sm:mb-16 font-light uppercase tracking-wider">
               Check out our latest releases and streaming links
             </p>
             
             {/* Placeholder for music content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-              <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Latest Album</h2>
-                <p className="text-sm sm:text-base text-gray-400">Album artwork and details will go here</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
+              <div className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 hover:border-teal-400/50 transition-all duration-300 shadow-2xl group">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 text-white uppercase tracking-tight" style={{ fontWeight: 900, letterSpacing: '-0.02em' }}>Latest Album</h2>
+                <p className="text-base sm:text-lg text-gray-300 font-light">Album artwork and details will go here</p>
               </div>
-              <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
-                <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Latest Single</h2>
-                <p className="text-sm sm:text-base text-gray-400">Single artwork and details will go here</p>
+              <div className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 hover:border-teal-400/50 transition-all duration-300 shadow-2xl group">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 text-white uppercase tracking-tight" style={{ fontWeight: 900, letterSpacing: '-0.02em' }}>Latest Single</h2>
+                <p className="text-base sm:text-lg text-gray-300 font-light">Single artwork and details will go here</p>
               </div>
             </div>
           </div>
@@ -186,29 +194,31 @@ const Home = () => {
       </section>
 
       {/* Shows Section */}
-      <section id="shows" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10">
+      <section id="shows" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center">Upcoming Shows</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-8 sm:mb-12 text-center tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.03em' }}>
+            Upcoming Shows
+          </h1>
           <div className="max-w-4xl mx-auto">
-            <p className="text-lg sm:text-xl text-gray-300 text-center mb-8 sm:mb-12">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 text-center mb-12 sm:mb-16 font-light uppercase tracking-wider">
               Catch us live at these upcoming events
             </p>
             
             {/* Placeholder for shows */}
-            <div className="space-y-4 sm:space-y-6">
-              <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 hover:border-teal-400/50 transition-all duration-300 shadow-2xl">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-semibold mb-1 sm:mb-2">Venue Name</h2>
-                    <p className="text-sm sm:text-base text-gray-400">City, State</p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 text-white uppercase tracking-tight" style={{ fontWeight: 900, letterSpacing: '-0.02em' }}>Venue Name</h2>
+                    <p className="text-base sm:text-lg text-teal-300 font-medium uppercase tracking-wider">City, State</p>
                   </div>
-                  <div className="mt-3 sm:mt-4 md:mt-0 text-left md:text-right">
-                    <p className="text-lg sm:text-xl font-semibold">Date TBD</p>
-                    <p className="text-sm sm:text-base text-gray-400">Time TBD</p>
+                  <div className="text-left md:text-right">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-1" style={{ fontWeight: 900 }}>Date TBD</p>
+                    <p className="text-base sm:text-lg text-gray-300 font-light uppercase tracking-wider">Time TBD</p>
                   </div>
                 </div>
               </div>
-              <p className="text-center text-gray-400 mt-8">
+              <p className="text-center text-gray-300 mt-8 sm:mt-12 text-lg sm:text-xl font-light uppercase tracking-wider">
                 More shows coming soon. Stay tuned!
               </p>
             </div>
@@ -217,17 +227,19 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10">
+      <section id="contact" className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center">Contact Us</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-8 sm:mb-12 text-center tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]" style={{ fontWeight: 900, letterSpacing: '-0.03em' }}>
+            Contact Us
+          </h1>
           <div className="max-w-2xl mx-auto">
-            <p className="text-lg sm:text-xl text-gray-300 text-center mb-8 sm:mb-12">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 text-center mb-12 sm:mb-16 font-light uppercase tracking-wider">
               Get in touch with us for bookings, collaborations, or just to say hello!
             </p>
             
-            <form onSubmit={handleContactSubmit} className="bg-gray-800 rounded-lg p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
+            <form onSubmit={handleContactSubmit} className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-2xl">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                <label htmlFor="name" className="block text-sm sm:text-base font-bold mb-3 uppercase tracking-wider text-white" style={{ fontWeight: 700 }}>
                   Name
                 </label>
                 <input
@@ -237,12 +249,13 @@ const Home = () => {
                   value={formData.name}
                   onChange={handleContactChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
+                  style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
                 />
               </div>
               
               <div>
-                <label htmlFor="contact-email" className="block text-sm font-medium mb-2">
+                <label htmlFor="contact-email" className="block text-sm sm:text-base font-bold mb-3 uppercase tracking-wider text-white" style={{ fontWeight: 700 }}>
                   Email
                 </label>
                 <input
@@ -252,12 +265,13 @@ const Home = () => {
                   value={formData.email}
                   onChange={handleContactChange}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
+                  style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-sm sm:text-base font-bold mb-3 uppercase tracking-wider text-white" style={{ fontWeight: 700 }}>
                   Message
                 </label>
                 <textarea
@@ -267,24 +281,67 @@ const Home = () => {
                   onChange={handleContactChange}
                   required
                   rows={6}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent resize-none"
+                  className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 resize-none transition-all font-light"
+                  style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
                 />
               </div>
               
               <button
                 type="submit"
-                className="w-full px-6 py-3 text-sm sm:text-base bg-teal-600 hover:bg-teal-500 text-white font-semibold rounded-lg transition-colors"
+                className="w-full px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg bg-teal-600 hover:bg-teal-500 text-white font-black uppercase tracking-wider rounded-lg transition-all duration-300 shadow-lg hover:shadow-teal-500/50"
+                style={{ fontWeight: 900 }}
               >
                 Send Message
               </button>
               
               {contactSubmitted && (
-                <p className="text-teal-400 text-center">Thanks for your message! We'll get back to you soon.</p>
+                <p className="text-teal-400 text-center text-base sm:text-lg font-medium uppercase tracking-wider">Thanks for your message! We'll get back to you soon.</p>
               )}
             </form>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-teal-500/20 bg-black/40 backdrop-blur-sm" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="text-center md:text-left">
+                <p className="text-xs sm:text-sm text-gray-300 font-light uppercase tracking-wider">
+                  © {new Date().getFullYear()} Atlas Slave. All rights reserved.
+                </p>
+              </div>
+              <div className="flex items-center gap-4 sm:gap-6">
+                <a 
+                  href="https://www.tiktok.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-teal-400 transition-colors text-xs sm:text-sm font-medium uppercase tracking-wider"
+                >
+                  TikTok
+                </a>
+                <a 
+                  href="https://www.instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-teal-400 transition-colors text-xs sm:text-sm font-medium uppercase tracking-wider"
+                >
+                  Instagram
+                </a>
+                <a 
+                  href="https://www.youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-teal-400 transition-colors text-xs sm:text-sm font-medium uppercase tracking-wider"
+                >
+                  YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
