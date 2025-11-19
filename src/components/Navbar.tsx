@@ -44,8 +44,8 @@ const Navbar = () => {
   };
 
   const mediaLinks = [
-    { name: 'TikTok', url: 'https://www.tiktok.com' },
-    { name: 'Instagram', url: 'https://www.instagram.com' },
+    { name: 'TikTok', url: 'https://www.tiktok.com/@atlasslaveband' },
+    { name: 'Instagram', url: 'https://www.instagram.com/atlasslaveband/' },
     { name: 'YouTube', url: 'https://www.youtube.com' },
   ];
 

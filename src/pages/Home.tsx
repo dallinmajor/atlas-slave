@@ -314,7 +314,7 @@ const Home = () => {
               </div>
               <div className="flex items-center gap-4 sm:gap-6">
                 <a 
-                  href="https://www.tiktok.com" 
+                  href="https://www.tiktok.com/@atlasslaveband" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-teal-400 transition-colors text-xs sm:text-sm font-medium uppercase tracking-wider"
@@ -322,7 +322,7 @@ const Home = () => {
                   TikTok
                 </a>
                 <a 
-                  href="https://www.instagram.com" 
+                  href="https://www.instagram.com/atlasslaveband/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-teal-400 transition-colors text-xs sm:text-sm font-medium uppercase tracking-wider"

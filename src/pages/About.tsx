@@ -49,7 +49,7 @@ const membersList = [
     image: 'https://via.placeholder.com/150',
   },
   {
-    name: 'Matt Gonzales',
+    name: 'Matt Gonzalez',
     instrument: 'Guitar',
     image: 'https://via.placeholder.com/150',
   },
