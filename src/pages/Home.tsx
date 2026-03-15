@@ -8,16 +8,7 @@ import AboutIntro from './../components/AboutIntro';
 
 const Home = () => {
   return (
-    <div
-      className="text-white relative"
-      style={{
-        backgroundImage: `url('/SSS01167 (1).jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+    <div className="text-white relative page-background">
       <BackgroundOverlay />
       <HeroSection />
       <AboutIntro className="container mx-auto px-4 max-w-4xl mt-[100px]" />
