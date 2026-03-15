@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/audio-proxy/:path*",
-      "destination": "/api/audio/:path*"
+      "destination": "/api/audio?path=:path*"
     }
   ]
 }
