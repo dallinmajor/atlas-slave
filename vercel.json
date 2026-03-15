@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/audio-proxy/:path*",
-      "destination": "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/:path*"
+      "destination": "/api/audio/:path*"
     }
   ]
 }

@@ -3,97 +3,35 @@ export type GalleryItem = {
     src: string;
 };
 
-export const galleryItems: GalleryItem[] = [
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS00951%20(1).jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS00964.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01039.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01050.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01063.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01065.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01085.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01094.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01125.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01153.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01212.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01345.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01391.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01400.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01432.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01439.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01449.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01461%20(1).jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01548.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01559.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01578.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01582.jpg",
-    },
-    {
-        name: "Band Photo Shoot Photo",
-        src: "https://pub-906aca35719743e28e7e6490148ac265.r2.dev/gallery/SSS01612.jpg",
-    }
+const galleryBaseUrl = '/audio-proxy/gallery';
+
+const galleryFileNames = [
+    'SSS00951%20(1).jpg',
+    'SSS00964.jpg',
+    'SSS01039.jpg',
+    'SSS01050.jpg',
+    'SSS01063.jpg',
+    'SSS01065.jpg',
+    'SSS01085.jpg',
+    'SSS01094.jpg',
+    'SSS01125.jpg',
+    'SSS01153.jpg',
+    'SSS01212.jpg',
+    'SSS01345.jpg',
+    'SSS01391.jpg',
+    'SSS01400.jpg',
+    'SSS01432.jpg',
+    'SSS01439.jpg',
+    'SSS01449.jpg',
+    'SSS01461%20(1).jpg',
+    'SSS01548.jpg',
+    'SSS01559.jpg',
+    'SSS01578.jpg',
+    'SSS01582.jpg',
+    'SSS01612.jpg',
 ];
+
+export const galleryItems: GalleryItem[] = galleryFileNames.map((fileName) => ({
+    name: 'Band Photo Shoot Photo',
+    src: `${galleryBaseUrl}/${fileName}`,
+}));
