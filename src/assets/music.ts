@@ -9,7 +9,8 @@ type MusicItem = {
 };
 
 const cloudflareBaseUrl = (import.meta.env.VITE_CLOUD_FLARE_R2_BASE_URL ?? '').replace(/\/$/, '');
-const musicBaseUrl = `${import.meta.env.DEV ? '/audio-proxy' : cloudflareBaseUrl}/music`;
+const useDirectR2InProd = import.meta.env.PROD && import.meta.env.VITE_USE_DIRECT_R2 === 'true' && cloudflareBaseUrl;
+const musicBaseUrl = `${useDirectR2InProd ? cloudflareBaseUrl : '/audio-proxy'}/music`;
 const buildMusicSrc = (fileName: string) => `${musicBaseUrl}/${fileName}`;
 
 export const musicItems: MusicItem[] = [
