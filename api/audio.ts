@@ -17,15 +17,30 @@ export default async function handler(req: any, res: any) {
     return;
   }
 
-  const r2BaseUrl = (process.env.CLOUD_FLARE_R2_BASE_URL || '').replace(/\/$/, '');
+  const r2BaseUrl = (
+    process.env.CLOUD_FLARE_R2_BASE_URL ||
+    process.env.VITE_CLOUD_FLARE_R2_BASE_URL ||
+    ''
+  ).replace(/\/$/, '');
+
   if (!r2BaseUrl) {
-    res.status(500).json({ error: 'Missing CLOUD_FLARE_R2_BASE_URL' });
+    res.status(500).json({
+      error: 'Missing Cloudflare base URL env var',
+      hint: 'Set CLOUD_FLARE_R2_BASE_URL (or VITE_CLOUD_FLARE_R2_BASE_URL) in Vercel Project Settings.',
+    });
     return;
   }
 
   const safePath = filePath
     .split('/')
-    .map((segment) => encodeURIComponent(decodeURIComponent(segment)))
+    .map((segment) => {
+      try {
+        return encodeURIComponent(decodeURIComponent(segment));
+      } catch {
+        // If segment is not valid URI-encoded text, keep it as-is.
+        return segment;
+      }
+    })
     .join('/');
 
   const upstreamUrl = `${r2BaseUrl}/${safePath}`;
@@ -68,7 +83,8 @@ export default async function handler(req: any, res: any) {
 
     const bodyBuffer = Buffer.from(await upstreamResponse.arrayBuffer());
     res.end(bodyBuffer);
-  } catch {
-    res.status(502).json({ error: 'Failed to load asset' });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown proxy failure';
+    res.status(502).json({ error: 'Failed to load asset', detail: message });
   }
 }
