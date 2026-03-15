@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { BrandButton, DesktopNavButton, MobileNavButton } from './NavButtons';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -8,39 +12,67 @@ const Navbar = () => {
   const mediaDropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
+  const brandButtonRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
     { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'music', label: 'Music' },
     { id: 'shows', label: 'Shows' },
+    { id: 'music', label: 'Music' },
+    { id: 'gallery', label: 'Gallery' },
+    { id: 'about', label: 'About' },
   ];
 
   const contactItem = { id: 'contact', label: 'Contact' };
+  const isHomePage = location.pathname === '/';
+
+  const scrollToHomeSection = (sectionId: string) => {
+    const element = sectionId === 'home'
+      ? document.body
+      : document.getElementById(sectionId);
+
+    if (!element) return;
+
+    const offset = window.innerWidth < 640 ? 80 : 96;
+    const elementPosition = sectionId === 'home'
+      ? 0
+      : element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
+
+    window.history.pushState(null, '', sectionId === 'home' ? '/' : `#${sectionId}`);
+    setActiveSection(sectionId);
+  };
 
   const scrollToSection = (sectionId: string) => {
-    const element = sectionId === 'home' 
-      ? document.body 
-      : document.getElementById(sectionId);
-    
-    if (element) {
-      // Responsive offset based on screen size
-      const offset = window.innerWidth < 640 ? 80 : 96; // Smaller offset on mobile
-      const elementPosition = sectionId === 'home' 
-        ? 0 
-        : element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - offset;
+    setIsMobileMenuOpen(false);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
-      // Update URL hash without scrolling
-      window.history.pushState(null, '', sectionId === 'home' ? '/' : `#${sectionId}`);
+    if (sectionId === 'gallery') {
+      navigate('/gallery');
       setActiveSection(sectionId);
-      setIsMobileMenuOpen(false);
+      return;
     }
+
+    if (sectionId === 'about') {
+      navigate('/about');
+      setActiveSection(sectionId);
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      window.setTimeout(() => {
+        scrollToHomeSection(sectionId);
+      }, 120);
+      return;
+    }
+
+    scrollToHomeSection(sectionId);
   };
 
   const mediaLinks = [
@@ -56,7 +88,7 @@ const Navbar = () => {
         setIsMediaOpen(false);
       }
       if (
-        mobileMenuRef.current && 
+        mobileMenuRef.current &&
         !mobileMenuRef.current.contains(event.target as Node) &&
         hamburgerButtonRef.current &&
         !hamburgerButtonRef.current.contains(event.target as Node)
@@ -76,13 +108,76 @@ const Navbar = () => {
 
   // Handle scroll to add background/border and detect active section
   useEffect(() => {
+    const applyCompactNavbarStyles = () => {
+      if (containerRef.current && innerRef.current) {
+        const isMobileView = window.innerWidth < 640;
+        containerRef.current.style.paddingTop = `${isMobileView ? 5 : 7}px`;
+        containerRef.current.style.paddingBottom = `${isMobileView ? 5 : 7}px`;
+        innerRef.current.style.height = `${isMobileView ? 36 : 44}px`;
+      }
+
+      if (brandButtonRef.current) {
+        brandButtonRef.current.style.transform = 'scale(0.92)';
+      }
+    };
+
+    if (!isHomePage) {
+      setIsScrolled(true);
+      applyCompactNavbarStyles();
+
+      if (location.pathname === '/gallery') {
+        setActiveSection('gallery');
+      } else if (location.pathname === '/about') {
+        setActiveSection('about');
+      }
+
+      return;
+    }
+
+    const handleResize = () => {
+      // Trigger scroll handler to update styles on resize
+      handleScroll();
+    };
+
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+
+      // Morph navbar shape with a smooth eased curve instead of linear interpolation.
+      const scrollTransitionDistance = 240;
+      const rawProgress = Math.min(currentScrollY / scrollTransitionDistance, 1);
+      const scrollProgress = rawProgress * rawProgress * (3 - 2 * rawProgress); // smoothstep
+      const logoScale = 1 - 0.08 * scrollProgress;
+
+      const initialPaddingYMobile = 12;
+      const initialPaddingYDesktop = 16;
+      const scrolledPaddingYMobile = 5;
+      const scrolledPaddingYDesktop = 7;
+
+      const initialHeightMobile = 56;
+      const initialHeightDesktop = 64;
+      const scrolledHeightMobile = 36;
+      const scrolledHeightDesktop = 44;
+
+      const paddingYMobile = initialPaddingYMobile - (initialPaddingYMobile - scrolledPaddingYMobile) * scrollProgress;
+      const paddingYDesktop = initialPaddingYDesktop - (initialPaddingYDesktop - scrolledPaddingYDesktop) * scrollProgress;
+      const heightMobile = initialHeightMobile - (initialHeightMobile - scrolledHeightMobile) * scrollProgress;
+      const heightDesktop = initialHeightDesktop - (initialHeightDesktop - scrolledHeightDesktop) * scrollProgress;
+
+      if (containerRef.current && innerRef.current) {
+        const isMobileView = window.innerWidth < 640;
+        containerRef.current.style.paddingTop = `${isMobileView ? paddingYMobile : paddingYDesktop}px`;
+        containerRef.current.style.paddingBottom = `${isMobileView ? paddingYMobile : paddingYDesktop}px`;
+        innerRef.current.style.height = `${isMobileView ? heightMobile : heightDesktop}px`;
+      }
+
+      if (brandButtonRef.current) {
+        brandButtonRef.current.style.transform = `scale(${logoScale})`;
+      }
 
       // Determine active section based on scroll position
-      const sections = ['home', 'about', 'music', 'shows', 'contact'];
-      const scrollPosition = scrollY + (window.innerWidth < 640 ? 120 : 150); // Responsive offset for navbar
+      const sections = ['home', 'shows', 'music', 'contact'];
+      const scrollPosition = currentScrollY + (window.innerWidth < 640 ? 120 : 150); // Responsive offset for navbar
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
@@ -93,16 +188,19 @@ const Navbar = () => {
       }
 
       // If at top, set to home
-      if (scrollY < 100) {
+      if (currentScrollY < 100) {
         setActiveSection('home');
       }
     };
 
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     // Check hash on mount
     const hash = window.location.hash.slice(1);
-    if (hash && ['about', 'music', 'shows', 'contact'].includes(hash)) {
+    if (hash && ['shows', 'music', 'contact'].includes(hash)) {
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
@@ -121,63 +219,74 @@ const Navbar = () => {
     // Set initial state
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    // Set initial padding and height values
+    if (containerRef.current && innerRef.current) {
+      const isMobileView = window.innerWidth < 640;
+      containerRef.current.style.paddingTop = `${isMobileView ? 12 : 16}px`;
+      containerRef.current.style.paddingBottom = `${isMobileView ? 12 : 16}px`;
+      innerRef.current.style.height = `${isMobileView ? 56 : 64}px`;
+    }
+
+    if (brandButtonRef.current) {
+      brandButtonRef.current.style.transform = 'scale(1)';
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isHomePage, location.pathname]);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
-        isScrolled 
-          ? 'bg-black/90 backdrop-blur-md border-b border-teal-500/30' 
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
+          ? 'bg-black/90 backdrop-blur-md'
           : 'bg-transparent'
-      }`}
+        }`}
       style={{ fontFamily: '"Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' }}
     >
-      <div className={`w-full px-4 sm:px-6 md:px-12 transition-all duration-700 ease-in-out ${
-        isScrolled 
-          ? 'py-2 sm:py-3' 
-          : 'py-3 sm:py-4'
-      }`}>
-        <div 
-          className={`flex items-center justify-between transition-all duration-700 ease-in-out ${
-            isScrolled ? 'h-10 sm:h-12' : 'h-14 sm:h-16'
-          }`}
+      <div
+        ref={containerRef}
+        className="w-full px-4 sm:px-6 md:px-12"
+      >
+        <div
+          ref={innerRef}
+          className="flex items-center justify-between"
         >
-          <button
+          <BrandButton
+            ref={brandButtonRef}
             onClick={() => scrollToSection('home')}
-            className="text-base sm:text-lg md:text-xl font-black text-white tracking-tight transition-all duration-300 hover:opacity-80 uppercase cursor-pointer px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 border-2 border-teal-500/50 hover:border-teal-400"
-            style={{ fontWeight: 900 }}
+            className="origin-left transition-none"
           >
             Atlas Slave
-          </button>
-          
+          </BrandButton>
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <button
+              <DesktopNavButton
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-3 py-2 text-sm font-bold text-white uppercase tracking-wide transition-all duration-300 ${
-                  activeSection === item.id
-                    ? 'text-teal-400 border-b-2 border-teal-400'
-                    : 'hover:text-teal-400'
-                }`}
-                style={{ fontWeight: 700 }}
+                active={activeSection === item.id}
               >
                 {item.label.toUpperCase()}
-              </button>
+              </DesktopNavButton>
             ))}
+
+            {/* Contact Link */}
+            <DesktopNavButton
+              onClick={() => scrollToSection(contactItem.id)}
+              active={activeSection === contactItem.id}
+            >
+              {contactItem.label.toUpperCase()}
+            </DesktopNavButton>
 
             {/* Media Dropdown */}
             <div className="relative" ref={mediaDropdownRef}>
-              <button
+              <DesktopNavButton
                 onClick={() => setIsMediaOpen(!isMediaOpen)}
-                className={`px-3 py-2 text-sm font-bold text-white uppercase tracking-wide transition-all duration-300 flex items-center gap-2 ${
-                  isMediaOpen
-                    ? 'text-teal-400'
-                    : 'hover:text-teal-400'
-                }`}
-                style={{ fontWeight: 700 }}
+                active={isMediaOpen}
+                className="flex items-center gap-2"
               >
                 MEDIA
                 <svg
@@ -188,7 +297,7 @@ const Navbar = () => {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </DesktopNavButton>
 
               {isMediaOpen && (
                 <div className="absolute top-full mt-2 right-0 min-w-[160px] bg-black/95 border border-teal-500/30 shadow-xl overflow-hidden">
@@ -207,19 +316,6 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-
-            {/* Contact Link */}
-            <button
-              onClick={() => scrollToSection(contactItem.id)}
-              className={`px-3 py-2 text-sm font-bold text-white uppercase tracking-wide transition-all duration-300 ${
-                activeSection === contactItem.id
-                  ? 'text-teal-400 border-b-2 border-teal-400'
-                  : 'hover:text-teal-400'
-              }`}
-              style={{ fontWeight: 700 }}
-            >
-              {contactItem.label.toUpperCase()}
-            </button>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -257,26 +353,31 @@ const Navbar = () => {
             }}
           >
             {navItems.map((item) => (
-              <button
+              <MobileNavButton
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`w-full text-left block px-6 py-4 text-sm font-bold text-white uppercase tracking-wide transition-colors border-b border-teal-500/20 last:border-b-0 ${
-                  activeSection === item.id
-                    ? 'bg-teal-500/20 text-teal-400'
-                    : 'hover:bg-teal-500/10 hover:text-teal-400'
-                }`}
-                style={{ fontWeight: 700 }}
+                active={activeSection === item.id}
+                showDivider={item.id !== navItems[navItems.length - 1].id}
               >
                 {item.label.toUpperCase()}
-              </button>
+              </MobileNavButton>
             ))}
 
+            {/* Mobile Contact Link */}
+            <MobileNavButton
+              onClick={() => scrollToSection(contactItem.id)}
+              active={activeSection === contactItem.id}
+              showDivider={true}
+            >
+              {contactItem.label.toUpperCase()}
+            </MobileNavButton>
+
             {/* Mobile Media Dropdown */}
-            <div className="border-b border-teal-500/20">
-              <button
+            <div>
+              <MobileNavButton
                 onClick={() => setIsMediaOpen(!isMediaOpen)}
-                className="w-full flex items-center justify-between px-6 py-4 text-sm font-bold text-white uppercase tracking-wide hover:bg-teal-500/10 hover:text-teal-400 transition-colors"
-                style={{ fontWeight: 700 }}
+                className="flex items-center justify-between"
+                showDivider={false}
               >
                 <span>MEDIA</span>
                 <svg
@@ -287,7 +388,7 @@ const Navbar = () => {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </MobileNavButton>
               {isMediaOpen && (
                 <div className="bg-black/50">
                   {mediaLinks.map((link) => (
@@ -305,19 +406,6 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-
-            {/* Mobile Contact Link */}
-            <button
-              onClick={() => scrollToSection(contactItem.id)}
-              className={`w-full text-left block px-6 py-4 text-sm font-bold text-white uppercase tracking-wide transition-colors ${
-                activeSection === contactItem.id
-                  ? 'bg-teal-500/20 text-teal-400'
-                  : 'hover:bg-teal-500/10 hover:text-teal-400'
-              }`}
-              style={{ fontWeight: 700 }}
-            >
-              {contactItem.label.toUpperCase()}
-            </button>
           </div>
         )}
       </div>
