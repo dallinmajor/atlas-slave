@@ -1,5 +1,5 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { galleryItems } from '../assets/gallery';
+import { galleryItems } from '../assets/gallery.ts';
 import SectionTitle from './SectionTitle';
 
 const GallerySection = () => {
