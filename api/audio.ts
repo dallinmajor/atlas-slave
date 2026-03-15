@@ -23,7 +23,12 @@ export default async function handler(req: any, res: any) {
     return;
   }
 
-  const upstreamUrl = `${r2BaseUrl}/${filePath}`;
+  const safePath = filePath
+    .split('/')
+    .map((segment) => encodeURIComponent(decodeURIComponent(segment)))
+    .join('/');
+
+  const upstreamUrl = `${r2BaseUrl}/${safePath}`;
   const upstreamHeaders: Record<string, string> = {};
   const rangeHeader = req.headers?.range;
 
