@@ -107,18 +107,20 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
     ws.on('pause', () => setIsPlaying(false));
     ws.on('finish', () => {
       setIsPlaying(false);
-      setCurrentTime(clipStart);
+      const normalizedStart = Math.min(Math.max(clipStart, 0), ws.getDuration());
+      ws.setTime(normalizedStart);
+      setCurrentTime(normalizedStart);
     });
     ws.on('timeupdate', (t) => {
+      const normalizedStart = Math.min(Math.max(clipStart, 0), ws.getDuration());
       const normalizedEnd = Math.min(
-        Math.max(clipEnd ?? ws.getDuration(), clipStart),
+        Math.max(clipEnd ?? ws.getDuration(), normalizedStart),
         ws.getDuration()
       );
       setCurrentTime(t);
 
       if (Number.isFinite(normalizedEnd) && normalizedEnd > 0 && t >= normalizedEnd) {
         ws.pause();
-        const normalizedStart = Math.min(Math.max(clipStart, 0), ws.getDuration());
         ws.setTime(normalizedStart);
         setCurrentTime(normalizedStart);
       }
@@ -196,7 +198,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
   const leftMaskWidth = fullDuration > 0 ? (normalizedClipStart / fullDuration) * 100 : 0;
   const rightMaskWidth = fullDuration > 0 ? ((fullDuration - normalizedClipEnd) / fullDuration) * 100 : 0;
   const clipWindowWidth = Math.max(100 - leftMaskWidth - rightMaskWidth, 0);
-  const clipRelativeCurrent = Math.max(currentTime - clipStart, 0);
+  const clipRelativeCurrent = Math.max(currentTime - normalizedClipStart, 0);
 
   return (
     <div
