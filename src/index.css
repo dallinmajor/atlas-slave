@@ -5,6 +5,20 @@ body {
   min-height: 100vh;
 }
 
+.page-background {
+  background-image: url('/SSS01167 (1).jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media (max-width: 839px) {
+  .page-background {
+    background-image: url('/mobile-bg.png');
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
