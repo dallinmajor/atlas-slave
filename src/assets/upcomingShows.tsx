@@ -20,20 +20,6 @@ const allShowData: UpcomingShowData[] = [
         time: "8:00 PM",
         link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
         otherBands: ["No Such Animal", "Grally" ],
-    },
-        {
-        venue: "Velour",
-        location: "Provo, Utah",
-        date: new Date(2026, 4, 4),
-        time: "8:00 PM",
-        link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
-    },
-        {
-        venue: "Velour",
-        location: "Provo, Utah",
-        date: new Date(2025, 4, 4),
-        time: "8:00 PM",
-        link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
     }
 ];
 
