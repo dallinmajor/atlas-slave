@@ -1,19 +1,22 @@
 import HeroSection from '../components/HeroSection';
 import MusicSection from '../components/MusicSection';
 import ShowsSection from '../components/ShowsSection';
+import GallerySection from '../components/GallerySection';
+import AboutSection from '../components/AboutSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import BackgroundOverlay from '../components/BackgroundOverlay';
-import AboutIntro from './../components/AboutIntro';
 
 const Home = () => {
   return (
     <div className="text-white relative page-background">
-      <BackgroundOverlay />
+      <BackgroundOverlay maxViewportHeights={1} />
+      <div className="absolute inset-0 z-[1] bg-black/60 pointer-events-none" />
       <HeroSection />
-      <AboutIntro className="container mx-auto px-4 max-w-4xl mt-[100px]" />
-      <ShowsSection />
+      <AboutSection />
       <MusicSection />
+      <ShowsSection />
+      <GallerySection />
       <ContactSection />
       <Footer />
     </div>

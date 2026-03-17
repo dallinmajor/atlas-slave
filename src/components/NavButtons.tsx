@@ -47,7 +47,7 @@ export const DesktopNavButton = ({
     <button
       {...buttonProps}
       className={joinClasses(
-        'px-3 py-1 text-sm font-bold uppercase tracking-wide transition-all duration-300',
+        'px-3 py-1 text-base font-bold uppercase tracking-wide transition-all duration-300',
         active ? 'text-teal-400' : 'text-white hover:text-teal-400',
         className
       )}
@@ -75,7 +75,7 @@ export const MobileNavButton = ({
     <button
       {...buttonProps}
       className={joinClasses(
-        'w-full text-left px-6 py-4 text-sm font-bold text-white uppercase tracking-wide transition-colors',
+        'w-full text-left px-6 py-4 text-base font-bold text-white uppercase tracking-wide transition-colors',
         showDivider && 'border-b border-teal-500/20',
         active ? 'bg-teal-500/20 text-teal-400' : 'hover:bg-teal-500/10 hover:text-teal-400',
         className

@@ -14,7 +14,7 @@ const MemberListItem = ({
   imageSrc = '/SSS01167 (1).jpg',
 }: MemberListItemProps) => {
   return (
-    <article className="bg-black/40 backdrop-blur-sm border-2 border-teal-500/50 hover:border-teal-400 rounded-lg p-4 sm:p-6 md:p-8 transition-all duration-300 shadow-xl hover:shadow-teal-500/20 relative overflow-hidden group">
+    <article className="bg-black/65 backdrop-blur-sm border-2 border-teal-500/50 hover:border-teal-400 rounded-lg p-4 sm:p-6 md:p-8 transition-all duration-300 shadow-xl hover:shadow-teal-500/20 relative overflow-hidden group">
       <div className="absolute inset-0 bg-gradient-to-br from-teal-500/0 to-teal-500/0 group-hover:from-teal-500/5 group-hover:to-teal-500/10 transition-all duration-500 pointer-events-none" />
 
       <div

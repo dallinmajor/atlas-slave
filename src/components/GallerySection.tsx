@@ -11,7 +11,7 @@ const GallerySection = () => {
       id="gallery"
       className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10"
       style={{
-        fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+        fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity,
         transform: `translateY(${translateY}px)`,
       }}
@@ -24,7 +24,7 @@ const GallerySection = () => {
             {galleryItems.map((photo, index) => (
               <div
                 key={`${photo.src}-${index}`}
-                className="group relative w-fit overflow-hidden rounded-lg border border-teal-500/30 bg-black/30 backdrop-blur-sm"
+                className="group relative w-fit overflow-hidden rounded-lg border border-teal-500/30 bg-black/65 backdrop-blur-sm"
               >
                 <img
                   src={photo.src}

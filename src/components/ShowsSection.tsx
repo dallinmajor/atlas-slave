@@ -10,9 +10,9 @@ const ShowsSection = () => {
     <section 
       ref={sectionRef}
       id="shows" 
-      className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" 
+      className="py-12 sm:py-16 md:py-20 relative z-10" 
       style={{ 
-        fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+        fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity: opacity,
         transform: `translateY(${translateY}px)`,
       }}
@@ -33,6 +33,8 @@ const ShowsSection = () => {
                 date={show.date}
                 time={show.time}
                 link={show.link}
+                otherBands={show.otherBands}
+                isNextShow={index === 0}
               />
             ))}
             <p className="text-center text-gray-300 mt-8 sm:mt-12 text-lg sm:text-xl font-light uppercase tracking-wider">
@@ -52,6 +54,7 @@ const ShowsSection = () => {
                     date={show.date}
                     time={show.time}
                     link={show.link}
+                    otherBands={show.otherBands}
                   />
                 ))}
               </>

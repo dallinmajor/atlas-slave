@@ -4,6 +4,7 @@ export type UpcomingShowData = {
     date: Date;
     time: string;
     link?: string;
+    otherBands?: string[];
 };
 
 export type ShowData = {
@@ -18,14 +19,22 @@ const allShowData: UpcomingShowData[] = [
         date: new Date(2026, 4, 4),
         time: "8:00 PM",
         link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
+        otherBands: ["No Such Animal", "Grally" ],
     },
-    {
-        venue: "The Complex",
-        location: "Salt Lake City, Utah",
-        date: new Date(2024, 0, 15),
-        time: "9:00 PM",
-        link: "https://www.thecomplexslc.com/events/atlas-slave",
+        {
+        venue: "Velour",
+        location: "Provo, Utah",
+        date: new Date(2026, 4, 4),
+        time: "8:00 PM",
+        link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
     },
+        {
+        venue: "Velour",
+        location: "Provo, Utah",
+        date: new Date(2025, 4, 4),
+        time: "8:00 PM",
+        link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
+    }
 ];
 
 const sortShowsByTimeline = (

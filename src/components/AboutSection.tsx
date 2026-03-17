@@ -51,7 +51,7 @@ const AboutSection = () => {
       id="about" 
       className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" 
       style={{ 
-        fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+        fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity: opacity,
         transform: `translateY(${translateY}px)`,
       }}
@@ -64,8 +64,8 @@ const AboutSection = () => {
               <div
                 key={member.name} 
                 style={{ 
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'fadeInUp 0.6s ease-out forwards'
+                  animationDelay: `${index * 70}ms`,
+                  animation: 'fadeInUp 0.4s ease-out forwards'
                 }}
               >
                 <MemberListItem
