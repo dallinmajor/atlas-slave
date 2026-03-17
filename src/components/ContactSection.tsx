@@ -32,7 +32,7 @@ const ContactSection = () => {
       id="contact" 
       className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10" 
       style={{ 
-        fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+        fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity: opacity,
         transform: `translateY(${translateY}px)`,
       }}
@@ -44,7 +44,7 @@ const ContactSection = () => {
             Get in touch with us for bookings, collaborations, or just to say hello!
           </p>
           
-          <form onSubmit={handleSubmit} className="bg-black/40 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-2xl">
+          <form onSubmit={handleSubmit} className="bg-black/65 backdrop-blur-sm border border-teal-500/20 rounded-lg p-6 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-2xl">
             <div>
               <label htmlFor="name" className="block text-sm sm:text-base font-bold mb-3 uppercase tracking-wider text-white" style={{ fontWeight: 700 }}>
                 Name
@@ -57,7 +57,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
-                style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
+                style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}
               />
             </div>
             
@@ -73,7 +73,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
-                style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
+                style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}
               />
             </div>
             
@@ -89,7 +89,7 @@ const ContactSection = () => {
                 required
                 rows={6}
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 resize-none transition-all font-light"
-                style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
+                style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}
               />
             </div>
             

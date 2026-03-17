@@ -171,13 +171,19 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
     const normalizedStart = Math.min(Math.max(clipStart, 0), ws.getDuration());
     const normalizedEnd = Math.min(Math.max(clipEnd ?? ws.getDuration(), normalizedStart), ws.getDuration());
 
-    if (ws.getCurrentTime() < normalizedStart || ws.getCurrentTime() >= normalizedEnd) {
+    onActivate(track.id);
+
+    const needsSeek = ws.getCurrentTime() < normalizedStart || ws.getCurrentTime() >= normalizedEnd;
+    if (needsSeek) {
       ws.setTime(normalizedStart);
       setCurrentTime(normalizedStart);
+      // On mobile, media.currentTime seeks are asynchronous — calling play()
+      // immediately after setTime() causes playback to start from 0 before the
+      // seek completes. Wait for the native seeked event before playing.
+      ws.getMediaElement().addEventListener('seeked', () => ws.play(), { once: true });
+    } else {
+      ws.play();
     }
-
-    onActivate(track.id);
-    ws.play();
   };
 
   const handleStop = () => {
@@ -202,7 +208,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
 
   return (
     <div
-      className={`bg-black/40 backdrop-blur-sm border rounded-lg px-4 py-3 transition-all duration-300 shadow-2xl ${
+      className={`bg-black/65 backdrop-blur-sm border rounded-lg px-4 py-3 transition-all duration-300 shadow-2xl ${
         isPlaying
           ? 'border-teal-400/70 shadow-teal-500/10'
           : 'border-teal-500/20 hover:border-teal-400/50'
@@ -290,7 +296,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
           Audio file could not load. Check src URL/path and CORS settings.
         </p>
       ) : (
-        <div className="relative w-full rounded-md overflow-hidden bg-black/20" style={{ height: `${WAVEFORM_HEIGHT}px`, minHeight: `${WAVEFORM_HEIGHT}px` }}>
+        <div className="relative w-full rounded-md overflow-hidden bg-black/35" style={{ height: `${WAVEFORM_HEIGHT}px`, minHeight: `${WAVEFORM_HEIGHT}px` }}>
           <div ref={containerRef} className="w-full" />
           <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(94,234,212,0.07)_0%,rgba(0,0,0,0.14)_62%,rgba(0,0,0,0.32)_100%)]" />
           {hasVisualClipMask && (
@@ -351,7 +357,7 @@ const MusicSection = () => {
       id="music"
       className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10"
       style={{
-        fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
+        fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity: opacity,
         transform: `translateY(${translateY}px)`,
       }}

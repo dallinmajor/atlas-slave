@@ -13,7 +13,7 @@ const EmailSignup = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 pb-4 sm:pb-6 md:pb-8" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+    <div className="container mx-auto px-4 pb-4 sm:pb-6 md:pb-8" style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}>
       <div className="max-w-md mx-auto">
         <h2 
           className="text-xl sm:text-2xl md:text-3xl font-black mb-2 sm:mb-3 md:mb-4 text-center tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" 
@@ -33,7 +33,7 @@ const EmailSignup = () => {
               placeholder="Enter your email"
               required
               className="flex-1 px-3 sm:px-4 md:px-5 py-2 sm:py-3 md:py-4 text-sm sm:text-base rounded-lg bg-black/60 backdrop-blur-sm text-white placeholder-gray-400 border border-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all font-light"
-              style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}
+              style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}
             />
             <button
               type="submit"

@@ -6,7 +6,7 @@ const mediaLinks = [
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 border-t border-teal-500/20 bg-black/40 backdrop-blur-sm" style={{ fontFamily: '"Inter", system-ui, -apple-system, sans-serif' }}>
+    <footer className="relative z-10 border-t border-teal-500/20 bg-black/40 backdrop-blur-sm" style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}>
       <div className="container mx-auto px-4 py-4 sm:py-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">

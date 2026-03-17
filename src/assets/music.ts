@@ -15,9 +15,6 @@ export const musicItems: MusicItem[] = [
     {
         title: "Color In Grey",
         src: buildMusicSrc("Color%20In%20Grey%20-%20main%20mix%20master%203.wav"),
-        spotifyLink: "https://open.spotify.com/track/example",
-        appleMusicLink: "https://music.apple.com/us/album/example",
-        youtubeLink: "https://www.youtube.com/watch?v=example",
         start: 263,
         end: 293,
     },

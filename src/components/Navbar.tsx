@@ -18,10 +18,10 @@ const Navbar = () => {
 
   const navItems = [
     { id: 'home', label: 'Home' },
-    { id: 'shows', label: 'Shows' },
-    { id: 'music', label: 'Music' },
-    { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About' },
+    { id: 'music', label: 'Music' },
+    { id: 'shows', label: 'Shows' },
+    { id: 'gallery', label: 'Gallery' },
   ];
 
   const contactItem = { id: 'contact', label: 'Contact' };
@@ -51,18 +51,6 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
-
-    if (sectionId === 'gallery') {
-      navigate('/gallery');
-      setActiveSection(sectionId);
-      return;
-    }
-
-    if (sectionId === 'about') {
-      navigate('/about');
-      setActiveSection(sectionId);
-      return;
-    }
 
     if (location.pathname !== '/') {
       navigate('/');
@@ -125,12 +113,6 @@ const Navbar = () => {
       setIsScrolled(true);
       applyCompactNavbarStyles();
 
-      if (location.pathname === '/gallery') {
-        setActiveSection('gallery');
-      } else if (location.pathname === '/about') {
-        setActiveSection('about');
-      }
-
       return;
     }
 
@@ -176,7 +158,7 @@ const Navbar = () => {
       }
 
       // Determine active section based on scroll position
-      const sections = ['home', 'shows', 'music', 'contact'];
+      const sections = ['home', 'shows', 'music', 'gallery', 'about', 'contact'];
       const scrollPosition = currentScrollY + (window.innerWidth < 640 ? 120 : 150); // Responsive offset for navbar
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -200,7 +182,7 @@ const Navbar = () => {
 
     // Check hash on mount
     const hash = window.location.hash.slice(1);
-    if (hash && ['shows', 'music', 'contact'].includes(hash)) {
+    if (hash && ['shows', 'music', 'gallery', 'about', 'contact'].includes(hash)) {
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
@@ -240,10 +222,10 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
-          ? 'bg-black/90 backdrop-blur-md'
-          : 'bg-transparent'
+        ? 'bg-black/90 backdrop-blur-md'
+        : 'bg-transparent'
         }`}
-      style={{ fontFamily: '"Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' }}
+      style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}
     >
       <div
         ref={containerRef}

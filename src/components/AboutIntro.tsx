@@ -10,7 +10,7 @@ const AboutIntro = ({ className = '', cardBottomSpacing = true }: AboutIntroProp
     <div className={className}>
       <SectionTitle>About Us</SectionTitle>
       <div
-        className={`bg-black/40 backdrop-blur-sm border-2 border-teal-500/50 hover:border-teal-400 rounded-lg p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 hover:shadow-teal-500/20 relative overflow-hidden group ${cardBottomSpacing ? 'mb-8 sm:mb-12' : ''}`}
+        className={`bg-black/65 backdrop-blur-sm border-2 border-teal-500/50 hover:border-teal-400 rounded-lg p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 hover:shadow-teal-500/20 relative overflow-hidden group ${cardBottomSpacing ? 'mb-8 sm:mb-12' : ''}`}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-teal-500/0 to-teal-500/0 group-hover:from-teal-500/5 group-hover:to-teal-500/10 transition-all duration-500 pointer-events-none" />
         <div className="relative z-10">

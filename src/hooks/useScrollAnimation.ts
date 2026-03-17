@@ -20,14 +20,14 @@ export const useScrollAnimation = () => {
       // Adjust start/end points based on screen size
       // Mobile: start earlier, end later (more forgiving)
       // Desktop: tighter animation window
-      const startMultiplier = isMobile ? 0.9 : isTablet ? 0.85 : 0.8;
-      const endMultiplier = isMobile ? 0.3 : isTablet ? 0.25 : 0.2;
+      const startMultiplier = isMobile ? 0.85 : isTablet ? 0.8 : 0.75;
+      const endMultiplier = isMobile ? 0.4 : isTablet ? 0.35 : 0.3;
       
       // Adjust translateY distance based on screen size
       const maxTranslateY = isMobile ? 32 : isTablet ? 48 : 64;
       
       // Use viewport height as base, but ensure minimum animation distance
-      const minAnimationDistance = windowHeight * 0.3; // At least 30% of viewport
+      const minAnimationDistance = windowHeight * 0.2; // At least 20% of viewport
       const startPoint = windowHeight * startMultiplier;
       const endPoint = windowHeight * endMultiplier;
       // Ensure we have a reasonable animation distance
@@ -37,10 +37,11 @@ export const useScrollAnimation = () => {
       // When rect.top is at effectiveStartPoint, progress = 0
       // When rect.top is at endPoint, progress = 1
       const progress = Math.max(0, Math.min(1, (effectiveStartPoint - rect.top) / (effectiveStartPoint - endPoint)));
+      const easedProgress = 1 - (1 - progress) * (1 - progress); // ease-out
       
       // Calculate opacity and translateY based on progress
-      const newOpacity = progress;
-      const newTranslateY = maxTranslateY * (1 - progress); // Start at maxTranslateY, end at 0px
+      const newOpacity = easedProgress;
+      const newTranslateY = maxTranslateY * (1 - easedProgress); // Start at maxTranslateY, end at 0px
       
       setOpacity(newOpacity);
       setTranslateY(newTranslateY);
