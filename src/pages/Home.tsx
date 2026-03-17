@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className="text-white relative page-background">
       <BackgroundOverlay maxViewportHeights={1} />
-      <div className="absolute inset-0 z-[1] bg-black/45 pointer-events-none" />
+      <div className="absolute inset-0 z-[1] bg-black/60 pointer-events-none" />
       <HeroSection />
       <AboutSection />
       <MusicSection />

@@ -205,62 +205,73 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
   const rightMaskWidth = fullDuration > 0 ? ((fullDuration - normalizedClipEnd) / fullDuration) * 100 : 0;
   const clipWindowWidth = Math.max(100 - leftMaskWidth - rightMaskWidth, 0);
   const clipRelativeCurrent = Math.max(currentTime - normalizedClipStart, 0);
+  const clipLengthLabel = isReady ? formatTime(duration) : '--:--';
 
   return (
     <div
-      className={`bg-black/65 backdrop-blur-sm border rounded-lg px-4 py-3 transition-all duration-300 shadow-2xl ${
+      className={`relative overflow-hidden border rounded-xl px-4 sm:px-5 py-3 transition-all duration-300 shadow-2xl ${
         isPlaying
-          ? 'border-teal-400/70 shadow-teal-500/10'
-          : 'border-teal-500/20 hover:border-teal-400/50'
+          ? 'bg-black/80 border-teal-300/70 shadow-[0_0_30px_rgba(45,212,191,0.22)]'
+          : 'bg-black/72 border-teal-500/25 hover:border-teal-400/55 hover:shadow-[0_0_26px_rgba(45,212,191,0.14)]'
       }`}
     >
-      {/* Header row: controls + title on left, media links on right */}
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(120deg,rgba(45,212,191,0.10)_0%,rgba(0,0,0,0)_42%)]" />
+
+      {/* Header row: controls + title + meta + links in one compact line */}
+      <div className="relative z-10 mb-2 flex items-center justify-between gap-2">
+        <div className="min-w-0 flex items-center gap-2 flex-1">
           <button
             onClick={handlePlay}
             disabled={!isReady || isPlaying}
             aria-label="Play"
-            className={`flex items-center justify-center w-7 h-7 rounded-full border transition-all duration-200 ${
+            className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200 shrink-0 ${
               isPlaying
-                ? 'bg-teal-500 border-teal-400 text-black cursor-default'
+                ? 'bg-teal-500 border-teal-300 text-black cursor-default'
                 : isReady
-                ? 'bg-transparent border-teal-500/50 text-teal-400 hover:bg-teal-500/20 hover:border-teal-400'
+                ? 'bg-black/35 border-teal-500/55 text-teal-300 hover:bg-teal-500/20 hover:border-teal-300'
                 : 'border-white/10 text-white/20 cursor-not-allowed'
             }`}
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3"><path d="M8 5v14l11-7z" /></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5"><path d="M8 5v14l11-7z" /></svg>
           </button>
           <button
             onClick={handleStop}
             disabled={!isPlaying}
             aria-label="Stop"
-            className={`flex items-center justify-center w-7 h-7 rounded-full border transition-all duration-200 ${
+            className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200 shrink-0 ${
               isPlaying
-                ? 'bg-transparent border-teal-500/50 text-teal-400 hover:bg-teal-500/20 hover:border-teal-400'
+                ? 'bg-black/35 border-teal-500/55 text-teal-300 hover:bg-teal-500/20 hover:border-teal-300'
                 : 'border-white/10 text-white/20 cursor-not-allowed'
             }`}
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3"><rect x="6" y="6" width="12" height="12" rx="1" /></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5"><rect x="6" y="6" width="12" height="12" rx="1" /></svg>
           </button>
+
           <span
-            className={`text-lg sm:text-xl font-black uppercase tracking-tight transition-colors duration-300 ${
-              isPlaying ? 'text-teal-300' : 'text-white'
+            className={`block truncate text-lg sm:text-xl font-black uppercase tracking-tight transition-colors duration-300 ${
+              isPlaying ? 'text-teal-200' : 'text-white'
             }`}
-            style={{ fontWeight: 900, letterSpacing: '-0.02em' }}
+            style={{ fontWeight: 900, letterSpacing: '-0.015em' }}
           >
             {track.title}
           </span>
+
+          {isPlaying && (
+            <span className="hidden sm:inline text-[10px] uppercase tracking-[0.16em] text-teal-200 font-black shrink-0">Now Playing</span>
+          )}
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5 shrink-0">
+          <span className="hidden md:inline text-[10px] uppercase tracking-[0.16em] text-teal-200/80 font-bold border border-teal-400/35 rounded-full px-2 py-0.5">
+            Clip {clipLengthLabel}
+          </span>
           {track.spotifyLink && (
             <a
               href={track.spotifyLink}
               target="_blank"
               rel="noreferrer"
               aria-label={`${track.title} on Spotify`}
-              className="inline-flex h-7 w-7 shrink-0 items-center justify-center leading-none text-teal-300/85 hover:text-teal-200 transition-colors duration-200"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center leading-none text-teal-300/90 hover:text-teal-100 transition-colors duration-200"
             >
               <SpotifyIcon />
             </a>
@@ -271,7 +282,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
               target="_blank"
               rel="noreferrer"
               aria-label={`${track.title} on Apple Music`}
-              className="inline-flex h-7 w-7 shrink-0 items-center justify-center leading-none text-teal-300/85 hover:text-teal-200 transition-colors duration-200"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center leading-none text-teal-300/90 hover:text-teal-100 transition-colors duration-200"
             >
               <AppleMusicIcon />
             </a>
@@ -282,7 +293,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
               target="_blank"
               rel="noreferrer"
               aria-label={`${track.title} on YouTube`}
-              className="inline-flex h-7 w-7 shrink-0 items-center justify-center leading-none text-teal-300/85 hover:text-teal-200 transition-colors duration-200"
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center leading-none text-teal-300/90 hover:text-teal-100 transition-colors duration-200"
             >
               <YouTubeIcon />
             </a>
@@ -292,11 +303,11 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
 
       {/* Waveform */}
       {hasError ? (
-        <p className="text-xs text-gray-500 italic py-5 text-center">
+        <p className="relative z-10 text-xs text-gray-500 italic py-5 text-center">
           Audio file could not load. Check src URL/path and CORS settings.
         </p>
       ) : (
-        <div className="relative w-full rounded-md overflow-hidden bg-black/35" style={{ height: `${WAVEFORM_HEIGHT}px`, minHeight: `${WAVEFORM_HEIGHT}px` }}>
+        <div className="relative z-10 w-full rounded-lg overflow-hidden bg-black/45 border border-teal-500/20" style={{ height: `${WAVEFORM_HEIGHT}px`, minHeight: `${WAVEFORM_HEIGHT}px` }}>
           <div ref={containerRef} className="w-full" />
           <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(94,234,212,0.07)_0%,rgba(0,0,0,0.14)_62%,rgba(0,0,0,0.32)_100%)]" />
           {hasVisualClipMask && (
@@ -334,7 +345,7 @@ const TrackPlayer = ({ track, isActive, onActivate }: TrackPlayerProps) => {
 
       {/* Time display */}
       {!hasError && (
-        <div className="flex justify-between mt-1 mb-2 text-xs text-gray-400 font-mono">
+        <div className="relative z-10 flex justify-between mt-1.5 text-xs text-gray-400 font-mono">
           <span>{formatTime(clipRelativeCurrent)}</span>
           <span>{isReady ? formatTime(duration) : '--:--'}</span>
         </div>
@@ -355,7 +366,7 @@ const MusicSection = () => {
     <section
       ref={sectionRef}
       id="music"
-      className="min-h-screen py-12 sm:py-16 md:py-20 relative z-10"
+      className="py-10 sm:py-12 md:py-14 relative z-10"
       style={{
         fontFamily: '"Barlow Condensed", system-ui, sans-serif',
         opacity: opacity,
@@ -364,12 +375,14 @@ const MusicSection = () => {
     >
       <div className="container mx-auto px-4">
         <SectionTitle>Music</SectionTitle>
-        <div className="max-w-2xl mx-auto">
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 text-center mb-12 sm:mb-16 font-light uppercase tracking-wider">
-            Check out our latest releases
+        <div className="max-w-4xl mx-auto relative">
+          <div className="absolute -inset-x-2 -top-3 h-28 bg-[radial-gradient(ellipse_at_top,rgba(45,212,191,0.18)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
+
+          <p className="relative text-lg sm:text-xl md:text-2xl text-gray-100 text-center mb-6 sm:mb-8 font-light uppercase tracking-[0.12em]">
+            Featured Clips - Loud, Fast, and Unapologetic
           </p>
 
-          <div className="flex flex-col gap-3">
+          <div className="relative flex flex-col gap-3">
             {musicItems.map((item, index) => (
               <TrackPlayer
                 key={item.title}
