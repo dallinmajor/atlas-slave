@@ -37,7 +37,7 @@ const HeroSection = () => {
         {/* FORKFEST Image */}
         <div className="mb-6 sm:mb-8 md:mb-10 max-w-2xl w-full">
           <img
-            src="/FORKFEST.jpg"
+            src="/ForkFestLineup.jpg"
             alt="Fork Fest"
             className="w-full h-auto rounded-lg shadow-2xl"
           />
