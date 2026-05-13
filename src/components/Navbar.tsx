@@ -223,6 +223,7 @@ const Navbar = () => {
 
   return (
     <nav
+      suppressHydrationWarning
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
         ? 'bg-black/90 backdrop-blur-md'
         : 'bg-transparent'

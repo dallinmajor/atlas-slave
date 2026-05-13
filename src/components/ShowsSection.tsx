@@ -10,9 +10,12 @@ interface ShowsSectionProps {
   referenceDateISO: string;
 }
 
+const showDateKey = (date: Date): string =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
 const ShowsSection = ({ referenceDateISO }: ShowsSectionProps) => {
   const [sectionRef, opacity, translateY] = useScrollAnimation();
-  const showData = useMemo(() => sortShowsByTimeline(allShowData, new Date(referenceDateISO)), [referenceDateISO]);
+  const showData = useMemo(() => sortShowsByTimeline(allShowData, referenceDateISO), [referenceDateISO]);
 
   return (
     <section 
@@ -35,7 +38,7 @@ const ShowsSection = ({ referenceDateISO }: ShowsSectionProps) => {
           <div className="space-y-6 sm:space-y-8">
             {showData.upcomingShows.map((show, index) => (
               <ShowCard 
-                key={`${show.venue}-${show.date.toISOString()}-${index}`}
+                key={`${show.venue}-${showDateKey(show.date)}-${index}`}
                 venue={show.venue}
                 location={show.location}
                 date={show.date}
@@ -57,7 +60,7 @@ const ShowsSection = ({ referenceDateISO }: ShowsSectionProps) => {
                 </p>
                 {showData.pastShows.map((show, index) => (
                   <ShowCard
-                    key={`past-${show.venue}-${show.date.toISOString()}-${index}`}
+                    key={`past-${show.venue}-${showDateKey(show.date)}-${index}`}
                     venue={show.venue}
                     location={show.location}
                     date={show.date}

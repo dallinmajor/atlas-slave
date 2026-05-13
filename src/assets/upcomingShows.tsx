@@ -12,6 +12,25 @@ export type ShowData = {
     pastShows: UpcomingShowData[];
 };
 
+const toDayNumber = (date: Date): number =>
+    date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+
+const parseReferenceDate = (referenceDate: Date | string): Date => {
+    if (referenceDate instanceof Date) {
+        return referenceDate;
+    }
+
+    const match = referenceDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (match) {
+        const year = Number(match[1]);
+        const month = Number(match[2]);
+        const day = Number(match[3]);
+        return new Date(year, month - 1, day);
+    }
+
+    return new Date(referenceDate);
+};
+
 export const allShowData: UpcomingShowData[] = [
     {
         venue: "Velour",
@@ -33,26 +52,18 @@ export const allShowData: UpcomingShowData[] = [
 
 export const sortShowsByTimeline = (
     shows: UpcomingShowData[],
-    referenceDate = new Date(),
+    referenceDate: Date | string = new Date(),
 ): ShowData => {
-    const today = new Date(referenceDate);
-    today.setHours(0, 0, 0, 0);
+    const today = parseReferenceDate(referenceDate);
+    const todayDayNumber = toDayNumber(today);
 
     const upcomingShows = shows
-        .filter((show) => {
-            const showDate = new Date(show.date);
-            showDate.setHours(0, 0, 0, 0);
-            return showDate >= today;
-        })
-        .sort((a, b) => a.date.getTime() - b.date.getTime());
+        .filter((show) => toDayNumber(show.date) >= todayDayNumber)
+        .sort((a, b) => toDayNumber(a.date) - toDayNumber(b.date));
 
     const pastShows = shows
-        .filter((show) => {
-            const showDate = new Date(show.date);
-            showDate.setHours(0, 0, 0, 0);
-            return showDate < today;
-        })
-        .sort((a, b) => b.date.getTime() - a.date.getTime());
+        .filter((show) => toDayNumber(show.date) < todayDayNumber)
+        .sort((a, b) => toDayNumber(b.date) - toDayNumber(a.date));
 
     return {
         upcomingShows,

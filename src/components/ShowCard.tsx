@@ -1,13 +1,15 @@
 import type { UpcomingShowData } from "../assets/upcomingShows";
 
+const MONTHS_SHORT = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
 const formatDayMonth = (date: Date): string =>
-    date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase();
+    `${MONTHS_SHORT[date.getMonth()]} ${date.getDate()}`;
 
 const formatMonth = (date: Date): string =>
-    date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    MONTHS_SHORT[date.getMonth()];
 
 const formatDay = (date: Date): string =>
-    date.toLocaleDateString('en-US', { day: '2-digit' });
+    String(date.getDate()).padStart(2, '0');
 
 type ShowCardProps = UpcomingShowData & {
     isNextShow?: boolean;

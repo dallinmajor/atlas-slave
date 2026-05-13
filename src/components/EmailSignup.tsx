@@ -74,15 +74,15 @@ const EmailSignup = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4 pb-4 sm:pb-6 md:pb-8" style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}>
+      <div className="relative z-10 container mx-auto pt-8 px-4 pb-4 sm:pb-6 md:pb-8" style={{ fontFamily: '"Barlow Condensed", system-ui, sans-serif' }}>
         <div className="max-w-md mx-auto">
           <h2 
-            className="text-xl sm:text-2xl md:text-3xl font-black mb-2 sm:mb-3 md:mb-4 text-center tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" 
+            className="text-xl sm:text-2xl md:text-3xl font-black mb-2 sm:mb-3 md:mb-4 text-center tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" 
             style={{ fontWeight: 900, letterSpacing: '-0.02em' }}
           >
             Stay Updated
           </h2>
-          <p className="text-sm sm:text-base text-gray-200 mb-3 sm:mb-4 md:mb-6 text-center drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] font-light">
+          <p className="text-sm sm:text-base text-white mb-3 sm:mb-4 md:mb-6 text-center drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] font-light">
             Sign up for our email list to get the latest news, music releases, and show dates.
           </p>
           <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 md:space-y-4">
