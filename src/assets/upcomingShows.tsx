@@ -16,10 +16,18 @@ const allShowData: UpcomingShowData[] = [
     {
         venue: "Velour",
         location: "Provo, Utah",
-        date: new Date(2026, 4, 4),
+        date: new Date(2026, 3, 4),
         time: "8:00 PM",
         link: "https://velour.eventcalendarapp.com/festival-of-fools-costume-concert-w-no-such-animal",
         otherBands: ["No Such Animal", "Grally" ],
+    },
+    {
+        venue: "Fork Fest",
+        location: "American Fork, Utah",
+        date: new Date(2026, 5, 13),
+        time: "12:45 PM",
+        link: "https://www.forkfest.org/",
+        otherBands: ["Neon Trees", "Joshua James", "Fictionist"]
     }
 ];
 
