@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+"use client";
+
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import AboutIntro from './AboutIntro';
 import MemberListItem, { type MemberListItemProps } from './MemberListItem';
@@ -33,17 +34,6 @@ const membersList: MemberListItemProps[] = [
 
 const AboutSection = () => {
   const [sectionRef, opacity, translateY] = useScrollAnimation();
-  const shuffledMembers = useMemo(() => {
-    const next = [...membersList];
-
-    // Fisher-Yates shuffle for a stable random order during this page load.
-    for (let i = next.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [next[i], next[j]] = [next[j], next[i]];
-    }
-
-    return next;
-  }, []);
 
   return (
     <section 
@@ -60,7 +50,7 @@ const AboutSection = () => {
         <div className="max-w-4xl mx-auto">
           <AboutIntro />
           <div className="flex flex-col gap-6 sm:gap-8">
-            {shuffledMembers.map((member, index) => (
+            {membersList.map((member, index) => (
               <div
                 key={member.name} 
                 style={{ 

@@ -1,3 +1,5 @@
+"use client";
+
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SectionTitle from './SectionTitle';
 

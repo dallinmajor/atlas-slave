@@ -11,20 +11,14 @@ const formatDay = (date: Date): string =>
 
 type ShowCardProps = UpcomingShowData & {
     isNextShow?: boolean;
+    isPastShow?: boolean;
 };
 
-const ShowCard = ({ venue, location, date, time, link, otherBands, isNextShow = false }: ShowCardProps) => {
+const ShowCard = ({ venue, location, date, time, link, otherBands, isNextShow = false, isPastShow = false }: ShowCardProps) => {
     if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
         throw new Error('ShowCard date must be a valid Date object.');
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const showDate = new Date(date);
-    showDate.setHours(0, 0, 0, 0);
-
-    const isPastShow = showDate < today;
     const isInteractive = Boolean(link) && !isPastShow;
     const supportingBands = (otherBands ?? []).filter((band) => band.trim().length > 0);
     const footerLine = supportingBands.length > 0

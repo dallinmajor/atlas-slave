@@ -12,7 +12,7 @@ export type ShowData = {
     pastShows: UpcomingShowData[];
 };
 
-const allShowData: UpcomingShowData[] = [
+export const allShowData: UpcomingShowData[] = [
     {
         venue: "Velour",
         location: "Provo, Utah",
@@ -31,7 +31,7 @@ const allShowData: UpcomingShowData[] = [
     }
 ];
 
-const sortShowsByTimeline = (
+export const sortShowsByTimeline = (
     shows: UpcomingShowData[],
     referenceDate = new Date(),
 ): ShowData => {

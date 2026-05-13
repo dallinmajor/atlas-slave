@@ -1,10 +1,12 @@
+"use client";
+
 import { useState, useEffect, useRef } from 'react';
 import { BrandButton, DesktopNavButton, MobileNavButton } from './NavButtons';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
   const [isMediaOpen, setIsMediaOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +27,7 @@ const Navbar = () => {
   ];
 
   const contactItem = { id: 'contact', label: 'Contact' };
-  const isHomePage = location.pathname === '/';
+  const isHomePage = pathname === '/';
 
   const scrollToHomeSection = (sectionId: string) => {
     const element = sectionId === 'home'
@@ -52,8 +54,8 @@ const Navbar = () => {
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false);
 
-    if (location.pathname !== '/') {
-      navigate('/');
+    if (pathname !== '/') {
+      router.push('/', { scroll: false });
       window.setTimeout(() => {
         scrollToHomeSection(sectionId);
       }, 120);
@@ -217,7 +219,7 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [isHomePage, location.pathname]);
+  }, [isHomePage, pathname]);
 
   return (
     <nav

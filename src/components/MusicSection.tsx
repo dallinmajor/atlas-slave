@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, useEffect, useCallback } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { musicItems } from '../assets/music';

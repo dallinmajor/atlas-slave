@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 
 .env
+
+# Next.js build/cache artifacts
+.next/
+out/
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Vercel local project metadata/cache
+.vercel/

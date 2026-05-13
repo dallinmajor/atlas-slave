@@ -1,10 +1,18 @@
+"use client";
+
+import { useMemo } from 'react';
+import { allShowData, sortShowsByTimeline } from '../assets/upcomingShows';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import showData from '../assets/upcomingShows';
 import SectionTitle from './SectionTitle';
 import ShowCard from './ShowCard';
 
-const ShowsSection = () => {
+interface ShowsSectionProps {
+  referenceDateISO: string;
+}
+
+const ShowsSection = ({ referenceDateISO }: ShowsSectionProps) => {
   const [sectionRef, opacity, translateY] = useScrollAnimation();
+  const showData = useMemo(() => sortShowsByTimeline(allShowData, new Date(referenceDateISO)), [referenceDateISO]);
 
   return (
     <section 
@@ -35,6 +43,7 @@ const ShowsSection = () => {
                 link={show.link}
                 otherBands={show.otherBands}
                 isNextShow={index === 0}
+                isPastShow={false}
               />
             ))}
             <p className="text-center text-gray-300 mt-8 sm:mt-12 text-lg sm:text-xl font-light uppercase tracking-wider">
@@ -55,6 +64,7 @@ const ShowsSection = () => {
                     time={show.time}
                     link={show.link}
                     otherBands={show.otherBands}
+                    isPastShow={true}
                   />
                 ))}
               </>

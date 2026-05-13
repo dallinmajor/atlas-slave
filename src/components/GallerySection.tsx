@@ -1,5 +1,7 @@
+"use client";
+
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { galleryItems } from '../assets/gallery.ts';
+import { galleryItems } from '../assets/gallery';
 import SectionTitle from './SectionTitle';
 
 const GallerySection = () => {
